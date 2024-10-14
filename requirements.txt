@@ -1,0 +1,8 @@
+django
+djangorestframework
+markdown      
+django-filter 
+uvicorn
+whitenoise
+faker
+django-cors-headers

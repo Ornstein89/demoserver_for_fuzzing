@@ -1,0 +1,177 @@
+openapi: "3.0.3"
+
+info:
+  title: REST API for fuzzing, MASCOM
+  description: REST API for fuzzing, MASCOM
+  version: 0.0.1
+
+servers:
+  - url: http://localhost:8000
+    description: Localhost dev version
+
+security: []
+
+paths:
+
+  /api/login:
+    post:
+      requestBody:
+          description: Login data
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: user1
+                  password:
+                    type: string
+                    example: pass1
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    pattern: '[0-9a-f]{40}$'
+        401:
+          description: Unauthorized
+
+  /api/book/list:
+    post:
+      parameters:
+        - name: Authorization
+          in: header
+          description: Access token
+          schema:
+            type: string
+            pattern: '^Token [0-9a-f]{40}$'
+            default: "Token "
+          required: true
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ordering:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                      - "uuid"
+                      - "title"
+                      - "abstract"
+                      - "dateOfEntry"
+                      - "author"
+                      - "developerOrganization"
+                      - "revisionNumber"
+                page:
+                  type: integer
+                  default : 0
+                page_size:
+                  type: integer
+                  default : 50
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  results:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Book"
+        401:
+          description: Unauthorized
+
+  /api/book/get:
+    post:
+      parameters:
+        - name: Authorization
+          in: header
+          description: Access token
+          schema:
+            type: string
+            pattern: '^Token [0-9a-f]{40}$'
+            default: "Token "
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                uuid:
+                  type: string
+                  format: uuid
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Book"
+        401:
+          description: Unauthorized
+
+  /api/book/update:
+    post:
+      parameters:
+        - name: Authorization
+          in: header
+          description: Access token
+          schema:
+            type: string
+            pattern: 'Token [0-9a-f]{40}$'
+            default: "Token "
+          required: true
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Book"
+        401:
+          description: Unauthorized
+
+
+components:
+  schemas:
+    Book:
+      type: object
+      properties:
+        uuid:
+          type: string
+          maxLength: 36
+          format: uuid
+        title:
+          type: string
+          maxLength: 256
+        abstract:
+          type: string
+          maxLength: 1024
+        dateOfEntry:
+          type: string
+          maxLength: 10
+        author:
+          type: string
+          maxLength: 256
+        developerOrganization:
+          type: string
+          maxLength: 256
+        revisionNumber:
+          type: integer

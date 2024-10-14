@@ -1,0 +1,105 @@
+### Файл REST API-плагина VS Code https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+
+@host = http://127.0.0.1:8000
+@token = 02eb961b2490a2d6b9ba7a371c67c1ff7d3189d9
+###
+
+POST {{host}}/api/login
+Content-Type: application/json
+
+{
+    "username":"user1",
+    "password":"pass1"
+}
+
+############################################################################################
+
+POST {{host}}/api/book/list
+Content-Type: application/json
+Authorization: Token {{token}}
+
+{
+    "ordering":["dateOfEntry"],
+    "filter":{
+
+    },
+    "page":1,
+    "page_size":5
+}
+
+###
+
+POST {{host}}/api/book/list
+Content-Type: application/json
+Authorization: Token {{token}}
+
+{
+
+}
+
+###
+
+GET {{host}}/api/book/get
+Content-Type: application/json
+Authorization: Token {{token}}
+
+{
+    "uuid": "15b5391c-7f91-4c44-bbee-e0ee5f56380a"
+}
+
+###
+
+POST {{host}}/api/book/create
+Content-Type: application/json
+Authorization: Token {{token}}
+
+{
+    "title": "Заглавие NEW",
+    "abstract": "Аннотация NEW",
+    "dateOfEntry": "2000-06-24",
+    "author": "Автор NEW",
+    "developerOrganization": "Издательство NEW",
+    "revisionNumber": 4
+}
+
+###  не задействовано
+
+POST {{host}}/api/book/delete
+Content-Type: application/json
+Authorization: Token {{token}}
+
+{
+    "uuid": "15b5391c-7f91-4c44-bbee-e0ee5f56380a"
+}
+
+###
+
+POST {{host}}/api/book/update
+Content-Type: application/json
+Authorization: Token {{token}}
+
+{
+    "uuid": "15b5391c-7f91-4c44-bbee-e0ee5f56380a",
+    "title": "Заглавие UPDATE",
+    "abstract": "Аннотация UPDATE",
+    "dateOfEntry": "2000-06-24",
+    "author": "Автор UPDATE",
+    "developerOrganization": "Издательство UPDATE",
+    "revisionNumber": 4
+}
+
+### не задействовано
+
+POST {{host}}/api/book/create
+Content-Type: application/json
+Authorization: Token {{token}}
+
+{
+    "uuid": "15b5391c-7f91-4c44-bbee-e0ee5f56380a",
+    "title": "Заглавие UPDATE",
+    "abstract": "Аннотация UPDATE",
+    "dateOfEntry": "2000-06-24",
+    "author": "Автор UPDATE",
+    "developerOrganization": "Издательство UPDATE",
+    "revisionNumber": 4
+}
