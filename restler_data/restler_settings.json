@@ -1,0 +1,16 @@
+{
+  "per_resource_settings": {},
+  "max_combinations": 20,
+  "authentication": {
+    "token": {
+      "location": "/restler_data/restler_token.txt",
+      "token_refresh_interval": 300
+    }
+  },
+  "exclude_requests": [
+    {
+      "endpoint": "/api/login",
+      "methods": ["POST"]
+    }
+  ]
+}

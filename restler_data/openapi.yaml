@@ -6,8 +6,10 @@ info:
   version: 0.0.1
 
 servers:
-  - url: http://localhost:8000
-    description: Localhost dev version
+  # - url: http://localhost:8000
+  #   description: Localhost dev version
+  - url: http://host.docker.internal:8000
+    description: Access from Docker with 
 
 security: []
 
@@ -45,15 +47,15 @@ paths:
 
   /api/book/list:
     post:
-      parameters:
-        - name: Authorization
-          in: header
-          description: Access token
-          schema:
-            type: string
-            pattern: '^Token [0-9a-f]{40}$'
-            default: "Token "
-          required: true
+      # parameters:
+      #   - name: Authorization
+      #     in: header
+      #     description: Access token
+      #     schema:
+      #       type: string
+      #       pattern: '^Token [0-9a-f]{40}$'
+      #       default: "Token "
+      #     required: true
       requestBody:
         required: false
         content:
@@ -98,15 +100,15 @@ paths:
 
   /api/book/get:
     post:
-      parameters:
-        - name: Authorization
-          in: header
-          description: Access token
-          schema:
-            type: string
-            pattern: '^Token [0-9a-f]{40}$'
-            default: "Token "
-          required: true
+      # parameters:
+      #   - name: Authorization
+      #     in: header
+      #     description: Access token
+      #     schema:
+      #       type: string
+      #       pattern: '^Token [0-9a-f]{40}$'
+      #       default: "Token "
+      #     required: true
       requestBody:
         required: true
         content:
@@ -129,15 +131,15 @@ paths:
 
   /api/book/update:
     post:
-      parameters:
-        - name: Authorization
-          in: header
-          description: Access token
-          schema:
-            type: string
-            pattern: 'Token [0-9a-f]{40}$'
-            default: "Token "
-          required: true
+      # parameters:
+      #   - name: Authorization
+      #     in: header
+      #     description: Access token
+      #     schema:
+      #       type: string
+      #       pattern: 'Token [0-9a-f]{40}$'
+      #       default: "Token "
+      #     required: true
       responses:
         200:
           description: Successful operation

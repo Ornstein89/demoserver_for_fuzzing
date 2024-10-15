@@ -1,0 +1,2 @@
+{u'app1': {}}
+Authorization: Token 02eb961b2490a2d6b9ba7a371c67c1ff7d3189d9
